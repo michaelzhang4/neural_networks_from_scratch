@@ -1,3 +1,4 @@
-1. Introduce multiple features
-2. Binary classification
-3. Multinomial Logistic Regression
+1. Introduce multiple features #
+2. Binary classification #
+3. Multinomial Logistic Regression #
+4. CNN
