@@ -1,4 +1,14 @@
 1. Introduce multiple features #
 2. Binary classification #
 3. Multinomial Logistic Regression #
-4. CNN
+4. Feedforward Neural Network
+		- Softmax/Sigmoid outputs depending on 				number of classes #
+		- Random initialisation on weights/biases #
+		- Calculate stochastic gradient descent on
+		weights (Chain Rule)
+5. CNN
+		- Feature pooling by majority more 1s = 1 			overall
+		- Convolutions by taking an average
+6. RNN
+7. Attention
+8. Transformers
