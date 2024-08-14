@@ -7,21 +7,6 @@ import math, random, time, cassiopeia as cass
 import sklearn.datasets
 
 import helpers as h
-
-def binary_data():
-    X=np.array([[1,1,1,18],[0,0,0,20],[0,0,0,28],[0,0,0,25],[0,1,1,23],
-                [1,1,0,20],[1,1,1,20],[0,0,0,20],[0,1,0,20],[0,1,1,23],
-                [1,1,1,23],[1,1,0,23],[0,0,1,20],[1,1,1,1],[1,1,1,13],
-                [1,0,1,14],[1,0,0,16],[0,1,1,17],[0,1,1,18],[1,0,1,18],
-                [0,0,1,18],[1,1,1,7],[1,1,1,40],[1,1,1,30],[1,1,1,35],
-                [1,0,1,32],[0,0,1,40],[0,0,1,60]])
-    y=[1,0,0,0,1,
-       0,1,0,0,1,
-       1,0,1,0,0,
-       0,0,0,1,1,
-       1,0,0,1,1,
-       1,0,0]
-    return (X,y)
     
 class multinomial_logistic_regression:
     # y is array of array of classes with 1 for correct class and 0 if not correct
