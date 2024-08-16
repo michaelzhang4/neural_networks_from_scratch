@@ -1,4 +1,4 @@
-import math
+import math, numpy as np
 import matplotlib.pyplot as plt
 
 # Calculates the mean of a list
@@ -38,8 +38,8 @@ def graph_linear_regression(X, y, y_hat, slope, equation):
     plt.show()
     
 # Sigmoid function
-def sigmoid(x):
-    return 1/(1+math.e**(-x))
+def sigmoid(z: np.ndarray) -> np.ndarray:
+    return 1/(1+np.exp(-z))
 
 # Log loss function
 def log_loss(self,y,y_hat):
