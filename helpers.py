@@ -53,6 +53,10 @@ def softmax(logits: np.ndarray) -> np.ndarray:
     # This calculates y_hat, the predicted probabilities for each logit e.g. 3 classes [0.4, 0.32, 0.28], which sum to 1
     return exponentials/total.reshape(total.size,1)
 
+# Relu function
+def relu(logits: np.ndarray) -> np.ndarray:
+    return np.maximum(logits,0)
+
 # Log loss function
 def log_loss(self,y,y_hat):
     e=0.0001
