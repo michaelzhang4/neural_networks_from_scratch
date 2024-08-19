@@ -41,8 +41,21 @@ def graph_linear_regression(X, y, y_hat, slope, equation):
 def sigmoid(z: np.ndarray) -> np.ndarray:
     return 1/(1+np.exp(-z))
 
+# Softmax function
+def softmax(logits: np.ndarray) -> np.ndarray:
+    exponentials = np.exp(logits)
+    if(logits[0].size==1):
+        # Sum row if only one row
+        total = np.sum(exponentials)
+    else:
+        # Sum all rows
+        total = np.sum(exponentials,axis=1)
+    # This calculates y_hat, the predicted probabilities for each logit e.g. 3 classes [0.4, 0.32, 0.28], which sum to 1
+    return exponentials/total.reshape(total.size,1)
+
 # Log loss function
 def log_loss(self,y,y_hat):
     e=0.0001
     return -(y*math.log(y_hat+e)+(1-y)*math.log(1-y_hat+e))
+
 
