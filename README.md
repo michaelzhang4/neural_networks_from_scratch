@@ -27,4 +27,5 @@ This project implements least squares regression, binary logistic regression, mu
    ```
 ## Results on MNIST Digits dataset
 
-![Screenshot from 2024-05-29 19-29-12](https://github.com/user-attachments/assets/51677873-47d9-4630-9ca3-2c45f7c97cee)
+![Screenshot from 2024-08-20 12-10-43](https://github.com/user-attachments/assets/665feeb0-d2f6-4a8b-8477-292f3c83d6b1)
+
