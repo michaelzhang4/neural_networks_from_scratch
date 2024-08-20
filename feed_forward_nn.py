@@ -8,31 +8,27 @@ class feed_forward_nn:
         # Generate random seed
         rng = np.random.default_rng(int(time.time()))
         # One hot encoded answer array
-        self.y : np.ndarray = y
+        self.y : np.ndarray = y#self.one_hot_encode(y,np.max(y))
         # Number of classes
         self.classes = y.shape[1]
-        # Weights 1 - before relu
-        self.w1 : np.ndarray = rng.uniform(size=(X[0].size,self.classes))
-        # Weights 2 - after relu
-        self.w2 : np.ndarray = rng.uniform(size=(self.classes,self.classes))
+        # Weights 1 - before relu, initialised with a uniform distribution
+        self.w1 = rng.uniform(-1, 1, size=(X[0].size, self.classes)) / np.sqrt(X[0].size)
+        # Weights 2 - after relu, initialised with a uniform distribution
+        self.w2 = rng.uniform(-1, 1, size=(self.classes, self.classes)) / np.sqrt(self.classes)
         # Bias 1 - ""
-        self.b1 : np.ndarray = rng.random(size=(1,self.classes))
+        self.b1 : np.ndarray = np.zeros((1,self.classes))
         # Bias 2 - ""
-        self.b2 : np.ndarray = rng.random(size=(1,self.classes))
+        self.b2 : np.ndarray = np.zeros((1,self.classes))
         # Input data array
         self.X : np.ndarray = X
         # Length of input data
         self.n : int = len(X)
-        # Number of iterations need ~20000 I found
-        self.iterations : int = 50000
+        # Number of iterations for training
+        self.iterations : int = 10000
         # Learning rate
-        self.alpha : float = 0.01
+        self.alpha : float = 0.005
         # Encoding array for labelling outputs
         self.encoding = encoding
-        # Structures/function used for scaling the data between 0 and 1
-        self.min_values=[]
-        self.max_values=[]
-        self.scale_data()
 
     # Train the weights and biases of the model using forward pass + backward propogation    
     def train(self):
@@ -79,33 +75,16 @@ class feed_forward_nn:
    
     def scale_data(self):
         # Finds the minimum and maximum values, then uses the scale all data to between 0 and 1
-        max_values=[]
-        min_values=[]
-        self.X=self.X.astype(float)
-        for col in range(len(self.X[0])):
-            max_val = 0
-            min_val = 99999
-            for row in range(len(self.X)):
-                if self.X[row][col] > max_val:
-                    max_val = self.X[row][col]
-                if self.X[row][col] < min_val:
-                    min_val = self.X[row][col]
-            max_values.append(max_val)
-            min_values.append(min_val)
-        scale_factors=[]
-        for i in range(len(max_values)):
-            count=0
-            m = c = max_values[i]-min_values[i]
-            while(c>10):
-                c%=10
-                count+=1
-            scale_factors.append(round(m+10**count,-count))
-        for col in range(len(self.X[0])):
-            for row in range(len(self.X)):
-                self.X[row][col]= (self.X[row][col]-min_values[col])/(max_values[col]-min_values[col])
+        self.min_values = np.min(self.X, axis=0)
+        self.max_values = np.max(self.X, axis=0)
+        
+        # Add epsilon to avoid division by zero
+        epsilon = 1e-10
+        self.X = (self.X - self.min_values) / (self.max_values - self.min_values + epsilon)
+    
+    def one_hot_encode(self, labels, num_classes):
+        return np.eye(num_classes)[labels]
 
-        self.max_values=max_values
-        self.min_values=min_values
 
     def scale(self,features):
         # Scales features between 0 and 1
@@ -115,7 +94,7 @@ class feed_forward_nn:
     
     def predict(self,X):
         # Returns the highest probability class
-        features = self.scale(np.array(X).astype(float))     
-        y_hat = h.softmax(np.dot(h.relu(np.dot(features, self.w1) + self.b1),self.w2)+self.b2)
+        # features = self.scale(np.array(X).astype(float))     
+        y_hat = h.softmax(np.dot(h.relu(np.dot(X, self.w1) + self.b1),self.w2)+self.b2)
         
         return self.encoding[np.argmax(y_hat)]
