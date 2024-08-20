@@ -26,8 +26,10 @@ class multinomial_logistic_regression:
             y_hat = h.softmax(np.dot(self.X,self.w)+self.b)
             # Get error matrix (predicted val - real val)
             error = y_hat - self.y
+            # Derivatives of weights and bias
             dw = 1/self.n * np.dot(self.X.T,error)
             db = 1/self.n * np.sum(error, axis=0, keepdims=True)
+            # Update weights and bias using deriv. * learning rate
             self.w-=self.alpha*dw
             self.b-=self.alpha*db
             if(i%10==0):
