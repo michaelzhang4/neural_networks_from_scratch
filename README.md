@@ -25,3 +25,6 @@ This project implements least squares regression, binary logistic regression, mu
    ```bash
    python run.py
    ```
+## Results on MNIST Digits dataset
+
+![Screenshot from 2024-05-29 19-29-12](https://github.com/user-attachments/assets/51677873-47d9-4630-9ca3-2c45f7c97cee)
