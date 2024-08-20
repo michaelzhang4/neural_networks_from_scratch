@@ -10,7 +10,7 @@ class multinomial_logistic_regression:
         self.classes = y.shape[1]
         rng = np.random.default_rng(int(time.time()))
         self.w : np.ndarray = rng.uniform(size=(X[0].size,self.classes))
-        self.b : np.ndarray = rng.random(size=(1,self.classes))
+        self.b : np.ndarray = np.zeros((1,self.classes))
         self.X : np.ndarray = X
         self.n : int = len(X)
         self.iterations : int = 50000
@@ -27,7 +27,9 @@ class multinomial_logistic_regression:
             # Get error matrix (predicted val - real val)
             error = y_hat - self.y
             # Derivatives of weights and bias
+            # Matrix of inputs*error size == X*(y^-y)
             dw = 1/self.n * np.dot(self.X.T,error)
+            # Average of errors == (y^-y)/n
             db = 1/self.n * np.sum(error, axis=0, keepdims=True)
             # Update weights and bias using deriv. * learning rate
             self.w-=self.alpha*dw
