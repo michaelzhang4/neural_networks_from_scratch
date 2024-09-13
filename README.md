@@ -1,7 +1,8 @@
 # Feed-Forward Neural Network from Scratch
 
 I made this project to gain a foundational understanding of neural networks.
-This project implements least squares regression, binary logistic regression, multinomial logistic regression and finally a feed-forward neural network from scratch using Python and NumPy.
+
+This project implements least squares regression, binary logistic regression, multinomial logistic regression and a feed-forward neural network from scratch using Python and NumPy.
 
 ## Installation
 
