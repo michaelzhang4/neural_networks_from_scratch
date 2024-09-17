@@ -4,7 +4,6 @@ import numpy as np, cassiopeia as cass
 
 def OLS_example():
     X = [5,7,12,16,20]
-
     y = [40,120,180,210,240]
 
     OLS.OLS(X,y)
@@ -12,7 +11,6 @@ def OLS_example():
     
 def IRLS_example():
     X = [5,7,12,16,20]
-
     y = [40,120,180,210,240]
 
     ILS.IRLS(X,y)
@@ -39,13 +37,12 @@ def multinomial_classification_data_one():
     X=np.array([[2623,118,1.17,102.9,125],[2449,103,105.9,1.32,500],[2493,108,104.1,0.97,150],
                 [2293,85.5,111.9,0.85,175],[2303,122.1,112.9,1.23,150],[2575,114,127.4,1.07,150],
                 [2725,125.75,126.9,0.99,125],[2283,121.6,101,1.11,125],[2595,123.5,123,1.02,125]])
-    # Assuassin [0,0,1], Skirmisher [1,0,0], Vanguard [0,1,0]
+    # Assassin [0,0,1], Skirmisher [1,0,0], Vanguard [0,1,0]
     y=np.array([[0,0,1],[0,0,1],[0,0,1],[1,0,0],[1,0,0],[1,0,0],[0,1,0],[0,1,0],[0,1,0]])
 
+    # Permute the data
     permutation = np.random.permutation(len(X))
-
     X = X[permutation]
-
     y = y[permutation]
 
     return (X,y,encoding)
@@ -76,6 +73,7 @@ def multinomial_classification_data_two():
                 [0,0,0,0,0,1,0],[0,0,0,0,0,1,0],[0,0,0,0,0,1,0],[0,0,0,0,0,1,0],[0,0,0,0,0,1,0],
                 [0,0,0,0,0,0,1],[0,0,0,0,0,0,1],[0,0,0,0,0,0,1],[0,0,0,0,0,0,1],[0,0,0,0,0,0,1]])
 
+    # Permute the data
     permutation = np.random.permutation(len(X))
     X = X[permutation]
     y = y[permutation]
@@ -111,6 +109,8 @@ def multinomial_classification_data_three():
         X[i][14]=stats.attack_damage
         X[i][15]=stats.attack_damage_per_level
         X[i][16]=stats.attack_speed
+    
+    # Permute the data
     permutation = np.random.permutation(len(X))
     X = X[permutation]
     y = y[permutation]
@@ -124,6 +124,8 @@ def multinomial_classification_data_four():
 
     X=np.empty((no_champs, 6))
     y=np.zeros((no_champs,len(encoding)))
+    
+    # Initialises all data of characters
     for i in range(no_champs):
         index = encoding.index(champs[i].tags[0])
         y[i][index]=1
@@ -137,6 +139,7 @@ def multinomial_classification_data_four():
         X[i][4]=stats.magic_resist
         X[i][5]=stats.movespeed
 
+    # Permutes the data
     permutation = np.random.permutation(len(X))
     X = X[permutation]
     y = y[permutation]

@@ -16,7 +16,7 @@ class binary_logistic_regression:
 
     # Train weights and biases
     def train(self):
-        for iter in range(self.iterations):
+        for _ in range(self.iterations):
             # Run on every sample in order in the training dataset
             # Stochastic Gradient Descent
             logits=np.dot(self.X,self.w)+self.b
@@ -35,7 +35,7 @@ class binary_logistic_regression:
             self.w-=self.alpha*dw
             self.b-=self.alpha*db
 
-
+    # Return model prediction
     def predict(self, features):
         f = np.array(features)
         logit = np.dot(f,self.w)+self.b

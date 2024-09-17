@@ -8,20 +8,24 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
-
+# Load MNIST Digits
 digits = sk.load_digits()
 
+# Transform to fit X and y as input features to the neural net
 X = digits.data#/255.0
-
 y = np.zeros((X.shape[0], 10))
 y[np.arange(X.shape[0]), digits.target] = 1
 
+# Split 80% of data for training and 20% for testing
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
+# Initialise neural network
 f = f.feed_forward_nn(X_train,y_train,["0","1","2","3","4","5","6","7","8","9"])
 
+# Train neural network
 f.train()
 
+# Make predictions on test set and print out model accuracy
 predictions = np.array([f.predict(x) for x in X_test])
 test_accuracy = np.mean(predictions == np.array([str(np.argmax(y)) for y in y_test]))
 print(f"Test accuracy: {test_accuracy:.4f}")

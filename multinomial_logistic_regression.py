@@ -8,6 +8,7 @@ class multinomial_logistic_regression:
     def __init__(self, X, y, encoding):
         self.y : np.ndarray = y
         self.classes = y.shape[1]
+        # Random weight initialisation
         rng = np.random.default_rng(int(time.time()))
         self.w : np.ndarray = rng.uniform(size=(X[0].size,self.classes))
         self.b : np.ndarray = np.zeros((1,self.classes))
@@ -38,6 +39,7 @@ class multinomial_logistic_regression:
                 print("Iteration",i,":",self.get_accuracy(y_hat,self.y))
     
     def get_accuracy(self,predicted,y):
+        # Gets percentage of correct label predictions
         predicted_labels = np.argmax(predicted,axis=1)
         true_labels = np.argmax(y,axis=1)
         return np.sum(true_labels==predicted_labels)/y.shape[0]
@@ -73,12 +75,13 @@ class multinomial_logistic_regression:
         self.min_values=min_values
 
     def scale(self,features):
+        # Scale all features to be between 0-1
         for i in range(len(features)):
             features[i]=(features[i]-self.min_values[i])/(self.max_values[i]-self.min_values[i])
         return features
     
     def predict(self,X):
+        # Most likely model prediction of y given input features
         features = self.scale(np.array(X).astype(float))     
         y_hat = h.softmax(np.dot(features, self.w) + self.b)
-        
         return self.encoding[np.argmax(y_hat)]
